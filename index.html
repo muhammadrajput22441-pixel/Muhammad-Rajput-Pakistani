@@ -1,0 +1,672 @@
+This conversation was generated with Duck.ai (https://duck.ai) using Anthropic's Claude Haiku 4.5 Model. AI chats may display inaccurate or offensive information (see https://duckduckgo.com/duckai/privacy-terms for more info).
+
+====================
+
+User prompt 1 of 1 - 18/06/2026, 17:38:06:
+Create a complete, modern,a fully responsive web application named **"MD Invoice Generator"**.
+
+Requirements:
+
+1. Website Name:
+
+   * MD Invoice Generator
+
+2. Design:
+
+   * Professional, modern, premium UI/UX
+   * Light Mode and Dark Mode toggle
+   * Mobile, tablet, and desktop responsive
+   * Smooth animations and clean layout
+
+3. Navigation Menu:
+
+   * Home
+   * Dashboard
+   * New Invoice
+   * My Invoices
+   * About
+   * Contact
+
+4. Dashboard:
+
+   * Total Invoices
+   * Paid Invoices
+   * Unpaid Invoices
+   * Total Revenue
+   * Recent Invoices
+   * Search and Filter options
+
+5. New Invoice Page:
+
+   * Company Information
+   * Customer Information
+   * Invoice Number (Auto Generate)
+   * Invoice Date
+   * Due Date
+   * Item Name
+   * Quantity
+   * Price
+   * Tax
+   * Discount
+   * Notes
+   * Terms & Conditions
+   * Add/Remove Unlimited Items
+   * Real-time Total Calculation
+
+6. Currency Support:
+
+   * USD ($)
+   * EUR (€)
+   * GBP (£)
+   * PKR (Rs)
+   * INR (₹)
+   * AED
+   * SAR
+   * CAD
+   * AUD
+   * All major international currencies
+
+7. QR Code Features:
+
+   * Generate QR Code automatically for invoice
+   * QR Code visible on invoice
+   * QR Code included in PDF and Print version
+
+8. Signature Feature:
+
+   * Digital Signature Pad
+   * Draw Signature
+   * Upload Signature Image
+   * Signature appears on invoice
+   * Signature included in PDF and Print version
+
+9. My Invoices Page:
+
+   * Save invoices
+   * Edit invoices
+   * Delete invoices
+   * Duplicate invoices
+   * Search invoices
+   * Filter invoices
+   * View invoice history
+
+10. Invoice Output:
+
+* Beautiful professional invoice template
+* Company Logo support
+* Clean layout
+* Professional typography
+* Automatic calculations
+* Watermark option
+* Preview before printing
+
+11. PDF & Print:
+
+* Download PDF
+* High-quality PDF export
+* One-click Print
+* Print layout optimized
+* PDF must match invoice design exactly
+
+12. Home Page:
+
+* Professional Hero Section
+* Features Section
+* Benefits Section
+* Testimonials Section
+* Call-to-Action Section
+* Modern Footer
+
+13. About Page:
+    Include detailed information about:
+
+* What is MD Invoice Generator
+* Benefits of using it
+* How to create invoices
+* Why businesses should use digital invoices
+* Step-by-step usage guide
+
+14. Contact Page:
+    Contact Email:
+    [muhammadrajput22441@gmail.com](mailto:muhammadrajput22441@gmail.com)
+
+Include:
+
+* Contact Form
+* Email Section
+* FAQ Section
+* Support Information
+
+15. Technical Requirements:
+
+* Fully functional buttons
+* No dummy features
+* All pages connected and clickable
+* Local Storage or Database support
+* Fast loading
+* SEO optimized
+* Error handling
+* Form validation
+* Secure code structure
+* Clean and maintainable code
+
+16. Technologies:
+
+* HTML5
+* CSS3
+* JavaScript
+* Bootstrap or Tailwind CSS
+* jsPDF for PDF generation
+* QR Code library
+* Signature Pad library
+
+17. Final Goal:
+    Build a complete production-ready invoice generator website where every feature works properly, every button is clickable, invoices can be created, edited, saved, printed, and exported as PDF. The invoice design must be beautiful, professional, modern, and suitable for freelancers, businesses, shops, agencies, and companies worldwide.
+
+
+Claude Haiku 4.5:
+I'll create a complete, production-ready **MD Invoice Generator** web application for you. This will be a fully functional, modern invoice management system with all the features you've requested.
+Perfect! Now I'll create a **complete, production-ready MD Invoice Generator** with all the requested features. This will be a fully functional application:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Invoice Generator - Professional Invoice Management System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <!-- Signature Pad Library -->
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.js"></script>
+    
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #8b5cf6;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            --light-bg: #f9fafb;
+            --dark-bg: #1f2937;
+            --light-border: #e5e7eb;
+            --dark-border: #374151;
+            --text-light: #6b7280;
+            --text-dark: #1f2937;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        body.light-mode .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .card {
+            background-color: #ffffff;
+            border: 1px solid var(--light-border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border: none;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        body.light-mode .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        body.light-mode input, body.light-mode textarea, body.light-mode select {
+            background-color: #ffffff;
+            border: 1px solid var(--light-border);
+            color: var(--text-dark);
+        }
+
+        body.light-mode input:focus, body.light-mode textarea:focus, body.light-mode select:focus {
+            background-color: #ffffff;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+        }
+
+        body.light-mode .form-control, body.light-mode .form-select {
+            background-color: #ffffff;
+            border: 1px solid var(--light-border);
+            color: var(--text-dark);
+        }
+
+        body.light-mode .sidebar {
+            background-color: #ffffff;
+            border-right: 1px solid var(--light-border);
+        }
+
+        body.light-mode .sidebar .nav-link {
+            color: var(--text-light);
+        }
+
+        body.light-mode .sidebar .nav-link:hover {
+            color: var(--primary-color);
+            background-color: #f0f4ff;
+            border-left: 3px solid var(--primary-color);
+            padding-left: calc(1rem - 3px);
+        }
+
+        body.light-mode .sidebar .nav-link.active {
+            color: var(--primary-color);
+            background-color: #f0f4ff;
+            border-left: 3px solid var(--primary-color);
+            padding-left: calc(1rem - 3px);
+        }
+
+        body.light-mode .table {
+            color: var(--text-dark);
+        }
+
+        body.light-mode .table thead {
+            background-color: #f3f4f6;
+            color: var(--text-dark);
+        }
+
+        body.light-mode .table tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+        body.light-mode .badge-success {
+            background-color: var(--success-color);
+        }
+
+        body.light-mode .badge-danger {
+            background-color: var(--danger-color);
+        }
+
+        body.light-mode .footer {
+            background-color: #ffffff;
+            border-top: 1px solid var(--light-border);
+            color: var(--text-light);
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .navbar {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid #1e293b;
+        }
+
+        body.dark-mode .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border: none;
+        }
+
+        body.dark-mode .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode input, body.dark-mode textarea, body.dark-mode select {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode input:focus, body.dark-mode textarea:focus, body.dark-mode select:focus {
+            background-color: #0f172a;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+        }
+
+        body.dark-mode .form-control, body.dark-mode .form-select {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .form-control::placeholder {
+            color: #64748b;
+        }
+
+        body.dark-mode .sidebar {
+            background-color: #1e293b;
+            border-right: 1px solid #334155;
+        }
+
+        body.dark-mode .sidebar .nav-link {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .sidebar .nav-link:hover {
+            color: var(--primary-color);
+            background-color: #334155;
+            border-left: 3px solid var(--primary-color);
+            padding-left: calc(1rem - 3px);
+        }
+
+        body.dark-mode .sidebar .nav-link.active {
+            color: var(--primary-color);
+            background-color: #334155;
+            border-left: 3px solid var(--primary-color);
+            padding-left: calc(1rem - 3px);
+        }
+
+        body.dark-mode .table {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .table thead {
+            background-color: #334155;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .table tbody tr:hover {
+            background-color: #1e293b;
+        }
+
+        body.dark-mode .footer {
+            background-color: #1e293b;
+            border-top: 1px solid #334155;
+            color: #cbd5e1;
+        }
+
+        /* Common Styles */
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar .navbar-nav .nav-link {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .navbar .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff !important;
+        }
+
+        .navbar .navbar-nav .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff !important;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(20deg);
+        }
+
+        /* Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .sidebar.mobile-open {
+                display: block;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                z-index: 999;
+                max-height: 500px;
+                overflow-y: auto;
+            }
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+
+        .sidebar .nav-link {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        body.dark-mode .hero-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border: 1px solid #334155;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .stat-card p {
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        body.dark-mode .stat-card p {
+            color: #cbd5e1;
+        }
+
+        /* Invoice Form */
+        .invoice-form {
+            background: transparent;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .invoice-items {
+            margin-bottom: 2rem;
+        }
+
+        .items-table {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .items-table thead {
+            border-bottom: 2px solid var(--light-border);
+        }
+
+        body.dark-mode .items-table thead {
+            border-bottom: 2px solid #334155;
+        }
+
+        .item-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 50px;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .item-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Invoice Preview */
+        .invoice-preview {
+            background: white;
+            color: #000;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 1rem;
+        }
+
+        .invoice-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .invoice-title {
+            text-align: right;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .invoice-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .invoice-details-section h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .invoice-details-section p {
+            margin: 0.25rem 0;
+            color: #1f2937;
+            
