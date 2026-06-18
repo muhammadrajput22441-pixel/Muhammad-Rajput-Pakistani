@@ -1,1 +1,0 @@
-# Muhammad-Rajput-Pakistani
